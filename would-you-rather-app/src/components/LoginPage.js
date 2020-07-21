@@ -2,7 +2,7 @@ import React from 'react'
 import { Card, Dropdown, Button, Grid, Header, Image} from 'semantic-ui-react'
 import { setAuthedUser } from '../actions/authedUser'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 class LoginPage extends React.Component {
 	state = { value: ''}
@@ -15,10 +15,17 @@ class LoginPage extends React.Component {
 		}
 	}
 
-	handleChange = (e, { value }) => this.setState({ value })
+	handleChange = (e, { value }) => {
+		e.preventDefault()
+		this.setState({ value }) 
+	}
 
 
 	render() {
+		const {from} = this.props.location.state || {from: {pathname: '/'}}
+		if(this.props.authedUser === true){
+			return <Redirect to={from}/>
+		}
 
 		return (
 			<Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
@@ -39,7 +46,7 @@ class LoginPage extends React.Component {
 									onChange={this.handleChange}
 								/>
 								<br/>
-								<Button as={Link} to='/home' fluid color='teal' onClick={this.onSubmit}>Submit</Button>
+								<Button fluid color='teal' onClick={this.onSubmit}>Submit</Button>
 							</Card.Description>
 						</Card.Content>
 					</Card>
@@ -49,7 +56,7 @@ class LoginPage extends React.Component {
 	}
 }
 
-function mapStateToProps({ users }) {
+function mapStateToProps({ authedUser, users }) {
 	const groupByUser = Object.values(users).reduce((groupUsers, user) => {
 		groupUsers.push({ 'key': user.id, 
 						'text': user.name, 
@@ -59,6 +66,7 @@ function mapStateToProps({ users }) {
 		return groupUsers
 	}, [])
 	return {
+		authedUser: authedUser !== null,
   		users:  groupByUser
   	}
 }

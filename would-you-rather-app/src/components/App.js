@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import LoginPage from './LoginPage'
 import HomePage from './HomePage'
@@ -26,7 +26,7 @@ class App extends React.Component {
 
 
     return (
-      <BrowserRouter>
+      <Router>
         <div className="ui container">
             <Nav />
             <Switch>
@@ -34,12 +34,12 @@ class App extends React.Component {
               <CustomRoute authenticated={authenticated} path='/home' exact component={HomePage} />
               <CustomRoute authenticated={authenticated} path='/add' exact component={NewQuestion} />
               <CustomRoute authenticated={authenticated} path='/leaderboard' exact component={LeaderBoard} />
-              <CustomRoute authenticated={authenticated} path='/question/:id' component={QuestionPage} />
-              <Route path="/404" component={NotFoundPage} />
-              <Redirect to="/404" />
+              <CustomRoute authenticated={authenticated} path='/question/:id' exact component={QuestionPage} />
+              <Route exact path='/404' component={NotFoundPage} /> 
+              <Route component={NotFoundPage} />
             </Switch>
         </div>
-      </BrowserRouter>
+      </Router>
     )
   }
 }

@@ -2,16 +2,19 @@ import React, { Fragment } from 'react'
 import { Card, Radio, Image, Progress, Label } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { saveQuestionAnswer } from '../actions/questions'
+import { Redirect } from 'react-router-dom'
 
 class QuestionPage extends React.Component {
 	state = { value: '' }
 
 	componentDidMount() {
-		if(this.props.question.optionOne.votes.includes(this.props.authedUser)){
-			this.setState({ value: 'optionOne'})
-		}
-		else if (this.props.question.optionTwo.votes.includes(this.props.authedUser)){
-			this.setState({ value: 'optionTwo'})
+		if (this.props.question) {
+			if(this.props.question.optionOne.votes.includes(this.props.authedUser)){
+				this.setState({ value: 'optionOne'})
+			}
+			else if (this.props.question.optionTwo.votes.includes(this.props.authedUser)){
+				this.setState({ value: 'optionTwo'})
+			}
 		}
 	}
 	
@@ -99,10 +102,15 @@ class QuestionPage extends React.Component {
 	}
 
 	render() {
+		if(this.props.question === undefined){
+			return <Redirect to='/404'/>
+		}
 		const { id } = this.props.match.params
 		const { question, users, authedUser } = this.props
 		const name = users[question.author].name
 		const avatarURL = users[question.author].avatarURL
+
+
 
 		return (
 			

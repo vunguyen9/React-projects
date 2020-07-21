@@ -14,7 +14,7 @@ class AuthButton extends React.Component {
 		if(this.props.isSignedIn) {
 			return (
 				
-				<Button onClick={this.onSignOutClick}>
+				<Button as={Link} to='/' onClick={this.onSignOutClick}>
 					Sign Out
 				</Button>
 				
