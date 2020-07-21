@@ -22,7 +22,7 @@ class LoginPage extends React.Component {
 
 
 	render() {
-		const {from} = this.props.location.state || {from: {pathname: '/'}}
+		const {from} = this.props.location.state || {from: {pathname: '/home'}}
 		if(this.props.authedUser === true){
 			return <Redirect to={from}/>
 		}
