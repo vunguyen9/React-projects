@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import Bar from "../components/Bar"
 import Button from "../components/Button"
-import { View, TextInput } from "react-native"
+import { View, TextInput, KeyboardAvoidingView } from "react-native"
 import { globalStyle as styles } from "../utils/common-styles"
 import { handleCreateCard } from "../redux/actions"
 import { connect } from "react-redux"
@@ -13,9 +13,14 @@ class AddQuestion extends Component {
   }
 
   goBack = () => {
-    const { navigation } = this.props
-    navigation.push("home")
+    const { navigation, id } = this.props
+    navigation.push("deck", {
+      id,
+    })
   }
+
+
+  
 
   onAnswerChanged = (answer) => {
     this.setState({
@@ -44,7 +49,7 @@ class AddQuestion extends Component {
 
   render() {
     return (
-      <View style={styles.main}>
+      <KeyboardAvoidingView behavior="padding" style={styles.main}>
         <Bar title="Add Question" subtitle="" onBackPressed={this.goBack} />
         <TextInput
           style={styles.inputField}
@@ -65,7 +70,7 @@ class AddQuestion extends Component {
             this.state.question.length === 0 && this.state.answer.length === 0
           }
         />
-      </View>
+      </KeyboardAvoidingView>
     )
   }
 }

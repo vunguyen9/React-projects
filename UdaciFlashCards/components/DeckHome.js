@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { View, Text, StyleSheet } from "react-native"
+import { View, Text, StyleSheet, Alert } from "react-native"
 import Bar from "../components/Bar"
 import { globalStyle as styles } from "../utils/common-styles"
 import ActionView from "../components/ActionView"
@@ -12,11 +12,16 @@ class DeckHome extends Component {
   }
 
   startQuiz = () => {
-    const { navigation, id } = this.props
-    console.log(id)
-    navigation.navigate("quiz", {
-      id,
-    })
+    const { navigation, id, deck } = this.props
+    if(deck.questions.length !== 0) {
+      navigation.navigate("quiz", {
+        id,
+      })
+    }
+    else {
+      Alert.alert("There's no question in this deck. Please add !")
+    }
+
   }
 
   createCard = () => {

@@ -5,16 +5,35 @@ import { surface, textPrimary, primary, secondary } from "../utils/colors";
 export default class QuizBox extends Component {
   state = {
     showAnswer: false,
-  };
+  }
+
+
+  static getDerivedStateFromProps(nextProps, prevState){
+    if(nextProps.question!==prevState.question){
+      return { question: nextProps.question};
+    }
+    else return null;
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if(this.props.question !== prevProps.question){
+      this.setState({showAnswer: false})
+    }
+  }
+
+
 
   toggleAnswer = () => {
     this.setState((currentState) => ({
       showAnswer: !currentState.showAnswer
-    }));
-  };
+    }))
+  }
+
+
 
   render() {
-    const { question, answer, index, total } = this.props;
+    const { question, answer, index, total } = this.props
+
 
     return (
       <View style={styles.quizBox}>

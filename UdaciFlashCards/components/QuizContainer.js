@@ -5,6 +5,7 @@ import QuizList from "../components/QuizList"
 import Button from "../components/Button"
 import { globalStyle } from "../utils/common-styles"
 
+
 export default class QuizContainer extends Component {
   state = {
     score: 0,
@@ -31,12 +32,12 @@ export default class QuizContainer extends Component {
     if (isShowScore) {
       this.setState({
         showScore: true,
-      });
-      return;
+      })
+      return
     } else {
       this.setState({
         currentIndex: next,
-      });
+      })
     }
   }
 
@@ -45,13 +46,13 @@ export default class QuizContainer extends Component {
       score: 0,
       showScore: false,
       currentIndex: 0,
-    });
-  };
+    })
+  }
 
-  answer(val) {
+  answer = (val) => {
     if (val) {
-      this.showNext();
-      return;
+      this.showNext()
+      return
     }
 
     this.setState((currentState) => ({

@@ -9,7 +9,7 @@ import { Provider } from "react-redux"
 import { createStore } from "redux"
 import reducers from "./redux/reducers"
 import middleware from "./redux/middleware"
-
+import { clearLocalNotification, setLocalNotification } from "./utils/helper"
 const store = createStore(reducers, middleware)
 
 const customFonts = {
@@ -23,8 +23,9 @@ export default class App extends Component {
     fontsLoaded: false,
   };
 
-  componentDidMount() {
-    this._loadFontsAsync();
+  async componentDidMount() {
+    this._loadFontsAsync()
+    setLocalNotification()
   }
 
   async _loadFontsAsync() {
