@@ -15,4 +15,5 @@ Mobile Flashcards is the third of three projects required for Udacity's React Na
 
 ## Tested: 
 
-iOS: Iphone 8Plus
+iOS: Iphone 8Plus 
+Android: HTC One M7 (notifications works well on this device)
