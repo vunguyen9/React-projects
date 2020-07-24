@@ -1,0 +1,7 @@
+export const background = "#F2F7F5"
+export const surface = "#e0e0e0"
+export const primary = "#03a5fc"
+export const textPrimary = "#00473E"
+export const textSecondary = "#475D5B"
+export const textDisabled = "#e0e0e0"
+export const disabledSurface = "#abb8ad"
